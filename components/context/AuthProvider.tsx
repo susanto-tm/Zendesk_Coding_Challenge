@@ -4,26 +4,36 @@ import ApiProvider from "./ApiProvider";
 
 interface AuthContextHooks {
   token: string
+  ready: boolean
 }
 
-const AuthContext = createContext<AuthContextHooks>({ token: "" })
+const AuthContext = createContext<AuthContextHooks>({ token: "", ready: false })
 
 const AuthProvider: FC = ({ children }) => {
   const [token, setToken] = useState("")
+  const [ready, setReady] = useState(false)
 
   useEffect(() => {
     (async () => {
       const token = await axios.get("/api/auth/token")
       if (token && token.data) {
-        setToken(token.data)
+        setToken(token.data.data)
       }
     })()
   }, [])
 
+  useEffect(() => {
+    if (token !== "") {
+      setReady(true)
+    }
+  }, [token])
+
   const value = useMemo(() => ({
-    token
+    token,
+    ready
   }), [
-    token
+    token,
+    ready
   ])
 
   return (

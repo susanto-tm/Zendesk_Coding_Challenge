@@ -24,6 +24,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       }
 
     } catch (e) {
+      console.error(e)
       return res.status(500).send({
         type: "ERROR|TICKETS",
         message: "Error getting tickets",

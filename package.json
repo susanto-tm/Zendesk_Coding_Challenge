@@ -8,6 +8,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/react": "^11.6.0",
+    "@emotion/styled": "^11.6.0",
     "@mui/material": "^5.1.1",
     "@mui/styled-engine-sc": "^5.1.0",
     "axios": "^0.24.0",

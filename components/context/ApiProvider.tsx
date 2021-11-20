@@ -1,4 +1,4 @@
-import React, {createContext, FC, useContext, useCallback, useMemo, useReducer, useRef, useState} from "react";
+import React, {createContext, FC, useCallback, useContext, useMemo, useState} from "react";
 import axios from "axios";
 import {useAuth} from "./AuthProvider";
 import {ApiProviderHooks, GetTickets} from "../../types/ApiProvider";
@@ -6,31 +6,28 @@ import {ApiProviderHooks, GetTickets} from "../../types/ApiProvider";
 const ApiContext = createContext<ApiProviderHooks>({} as ApiProviderHooks)
 
 const ApiProvider: FC = ({ children }) => {
-  const { token } = useAuth()
-  const [page, setPage] = useState(1)
+  const { token, ready } = useAuth()
 
-  const api = useMemo( () => axios.create({
-    headers: {
-      authorization: `Bearer ${token}`
-    }
-  }), [token])
-
-  const getTickets: () => Promise<GetTickets> = useCallback(async () => {
-    const tickets = await api.get("/tickets")
-
-    const next = async (next_page?: number) => {
-      if (next_page) {
-        setPage(next_page + 1)
-      }
-      return await api.get("/tickets", {
-        params: {
-          page: next_page ?? page
+  const api = useMemo( () => {
+    if (ready) {
+      return axios.create({
+        baseURL: "/api",
+        headers: {
+          authorization: `Bearer ${token}`
         }
       })
     }
+  }, [token, ready])
 
-    return [next, tickets.data]
-  }, [api, page])
+  const getTickets: GetTickets = useCallback(async (page: number) => {
+    if (api) {
+      return (await api.get("/tickets", {
+        params: {
+          page
+        }
+      })).data.data
+    }
+  }, [api])
 
   const value = useMemo(() => ({
     api,

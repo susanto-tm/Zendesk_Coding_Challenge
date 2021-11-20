@@ -11,7 +11,7 @@ const ApiProvider: FC = ({ children }) => {
   const api = useMemo( () => {
     if (ready) {
       return axios.create({
-        baseURL: "/api",
+        baseURL: `/api`,
         headers: {
           authorization: `Bearer ${token}`
         }
@@ -19,11 +19,14 @@ const ApiProvider: FC = ({ children }) => {
     }
   }, [token, ready])
 
-  const getTickets: GetTickets = useCallback(async (page: number) => {
+  const getTickets: GetTickets = useCallback(async (page: number, limit?: number) => {
+    let per_page = limit ?? 15
+
     if (api) {
       return (await api.get("/tickets", {
         params: {
-          page
+          page,
+          per_page
         }
       })).data.data
     }

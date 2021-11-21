@@ -1,7 +1,7 @@
-import React, {createContext, FC, useCallback, useContext, useMemo, useState} from "react";
+import React, {createContext, FC, useCallback, useContext, useMemo} from "react";
 import axios from "axios";
 import {useAuth} from "./AuthProvider";
-import {ApiProviderHooks, GetTickets} from "../../types/ApiProvider";
+import {ApiProviderHooks, GetCounts, GetTickets} from "../../types/ApiProvider";
 
 const ApiContext = createContext<ApiProviderHooks>({} as ApiProviderHooks)
 
@@ -19,25 +19,62 @@ const ApiProvider: FC = ({ children }) => {
     }
   }, [token, ready])
 
-  const getTickets: GetTickets = useCallback(async (page: number, limit?: number) => {
-    let per_page = limit ?? 15
+  const getTickets: GetTickets = useCallback(async (page: number, queryLimit?: number) => {
+    let limit = queryLimit ?? 15
 
     if (api) {
       return (await api.get("/tickets", {
         params: {
           page,
-          per_page
+          limit
         }
       })).data.data
     }
   }, [api])
 
+  const getCounts: GetCounts = useCallback(async () => {
+    if (api) {
+      const all = await api.get("/tickets/count")
+      const open = await api.get("/tickets/count", {
+        params: {
+          status: "open"
+        }
+      })
+      const pending = await api.get("/tickets/count", {
+        params: {
+          status: "pending"
+        }
+      })
+      const closed = await api.get("/tickets/count", {
+        params: {
+          status: "closed"
+        }
+      })
+
+      return {
+        all: all.data.data,
+        open: open.data.data,
+        pending: pending.data.data,
+        closed: closed.data.data
+      }
+    } else {
+      return {
+        all: 0,
+        open: 0,
+        pending: 0,
+        closed: 0
+      }
+    }
+  }, [api])
+
   const value = useMemo(() => ({
     api,
-    getTickets
+    getTickets,
+    getCounts
   }), [
     api,
-    getTickets
+    getTickets,
+    getCounts
   ])
 
   return (

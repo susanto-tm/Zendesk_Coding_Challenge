@@ -1,5 +1,6 @@
 import type {NextApiRequest, NextApiResponse} from "next";
 import {zendeskApi} from "utils/api/axios";
+import { readFile } from 'fs';
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const { page: queryPage, limit: queryLimit } = req.query

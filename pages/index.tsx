@@ -1,7 +1,7 @@
 import type { NextPage } from 'next'
 import {useApi} from "../components/context/ApiProvider";
-import {useCallback, useEffect, useState} from "react";
-import {Grid, styled, Typography} from "@mui/material";
+import React, {useCallback, useEffect, useState} from "react";
+import {Grid, Pagination, styled, Typography} from "@mui/material";
 import Ticket from "../components/Home/Ticket";
 import {useAuth} from "../components/context/AuthProvider";
 import {BaseHeader} from "../components/Home/Common";
@@ -14,7 +14,18 @@ import TicketsSection from "../components/Home/TicketsSection";
 const Main = styled(Grid)({
   width: "100%",
   backgroundColor: "#F7F8FA",
-  padding: "30px 50px"
+  padding: "30px 50px",
+  minHeight: "100vh"
+})
+
+const TicketPagination = styled(Pagination)({
+  "& .Mui-selected": {
+    backgroundColor: "#E34F32 !important",
+    color: "white"
+  },
+  "& .MuiPaginationItem-root:not(.Mui-selected):not(.MuiPaginationItem-previousNext)": {
+    color: "rgba(0, 0, 0, 0.2)"
+  }
 })
 
 const Home: NextPage = () => {
@@ -39,7 +50,6 @@ const Home: NextPage = () => {
   const fetchStats = useCallback(async () => {
     try {
       const { all, open, pending, closed } = await getCounts()
-      console.log("ALL", all)
       setAllCount(all)
       setOpenCount(open)
       setPendingCount(pending)
@@ -48,6 +58,10 @@ const Home: NextPage = () => {
       console.error(e)
     }
   }, [getCounts])
+
+  const onPageChange = (event: React.ChangeEvent<unknown>, page: number) => {
+    setPage(page)
+  }
 
   useEffect(() => {
     if (ready) {
@@ -74,6 +88,9 @@ const Home: NextPage = () => {
       <StatsSection allCount={allCount} openCount={openCount} pendingCount={pendingCount} closedCount={closedCount} />
       <SectionHeader text="All Tickets" sx={{ mt: 2 }} />
       <TicketsSection tickets={tickets} />
+      <Grid item container justifyContent="flex-end" sx={{ mt: 2 }}>
+        <TicketPagination count={Math.ceil(allCount / 25)} onChange={onPageChange} />
+      </Grid>
     </Main>
   )
 }

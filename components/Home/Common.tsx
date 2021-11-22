@@ -16,7 +16,8 @@ export const Generic = styled(BaseTypography)({
 
 export const StatusIcon = styled(Box)({
   height: "10px",
-  width: "10px"
+  width: "10px",
+  borderRadius: "100%",
 })
 
 export const BaseHeader = styled(Typography)({

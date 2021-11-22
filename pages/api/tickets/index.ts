@@ -5,7 +5,7 @@ import { readFile } from 'fs';
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const { page: queryPage, limit: queryLimit } = req.query
   let page = queryPage ?? 1,
-      limit = queryLimit ?? 15
+      limit = queryLimit ?? 25
 
   if (req.headers.authorization) {
     try {

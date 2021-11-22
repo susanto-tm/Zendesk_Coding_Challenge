@@ -20,7 +20,7 @@ const ApiProvider: FC = ({ children }) => {
   }, [token, ready])
 
   const getTickets: GetTickets = useCallback(async (page: number, queryLimit?: number) => {
-    let limit = queryLimit ?? 15
+    let limit = queryLimit ?? 25
 
     if (api) {
       return (await api.get("/tickets", {
@@ -67,14 +67,22 @@ const ApiProvider: FC = ({ children }) => {
     }
   }, [api])
 
+  const getTicket = useCallback( async (id: number) => {
+    if (api) {
+      return (await api.get(`/tickets/${id}`)).data
+    }
+  }, [api])
+
   const value = useMemo(() => ({
     api,
     getTickets,
-    getCounts
+    getCounts,
+    getTicket
   }), [
     api,
     getTickets,
-    getCounts
+    getCounts,
+    getTicket
   ])
 
   return (

@@ -3,6 +3,7 @@ import {Box, Card, Grid, Link, styled, Typography} from "@mui/material";
 import {Generic, StatusIcon, Container} from "./Common";
 import moment from 'moment'
 import Tag from "./Tag";
+import {useRouter} from "next/router";
 
 interface TicketProps {
   data: any
@@ -12,10 +13,10 @@ const TicketContainer = styled(Container)({
   backgroundColor: "white",
   borderRadius: 12,
   padding: "15px 20px",
-  height: "70px",
+  transition: "background-color 200ms ease-in-out",
+  cursor: "pointer",
   "&:hover": {
     backgroundColor: "#f5f5f5",
-    transition: "background-color 400ms ease-in-out"
   }
 })
 
@@ -52,10 +53,14 @@ const TicketStatus: FC<{ status: string }> = ({ status }) => {
 
 const Ticket: FC<TicketProps> = ({ data }) => {
   const { id, created_at, subject, priority, status, tags } = data
+  const router = useRouter()
+
+  const onClick = async () => {
+    await router.push(`/ticket/${id}`)
+  }
 
   return (
-    <TicketCard href={`/ticket/${encodeURIComponent(id)}`}>
-    <TicketContainer container sx={{ mt: 1 }} alignItems="center" columns={16}>
+    <TicketContainer onClick={onClick} container sx={{ mt: 1 }} alignItems="center" columns={16}>
       <Grid item xs={1}>
         <Generic>
           #{ id }
@@ -71,7 +76,7 @@ const Ticket: FC<TicketProps> = ({ data }) => {
       </Grid>
       <Grid item xs={2}>
         <Generic>
-          { priority ?? "No Priority" }
+          { priority ? priority.charAt(0).toUpperCase() + priority.slice(1).toLowerCase() : "No Priority" }
         </Generic>
       </Grid>
       <Grid item xs={2}>
@@ -83,7 +88,6 @@ const Ticket: FC<TicketProps> = ({ data }) => {
         { tags && tags.map((tag: any, index: number) => <Tag text={tag} key={index} />)}
       </Grid>
     </TicketContainer>
-    </TicketCard>
   )
 }
 

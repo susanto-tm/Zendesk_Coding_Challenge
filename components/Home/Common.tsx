@@ -1,12 +1,12 @@
 import {Box, Grid, styled, Typography} from "@mui/material";
+import {BoldHeader, RegularText} from "components/base";
 
 export const Container = styled(Grid)({
   padding: "5px 20px"
 })
 
-export const BaseTypography = styled(Typography)({
+export const BaseTypography = styled(RegularText)({
   fontSize: 14,
-  fontWeight: 500,
 })
 
 export const Generic = styled(BaseTypography)({
@@ -20,8 +20,7 @@ export const StatusIcon = styled(Box)({
   borderRadius: "100%",
 })
 
-export const BaseHeader = styled(Typography)({
+export const BaseHeader = styled(BoldHeader)({
   fontSize: 32,
-  fontWeight: 800,
   color: "black"
 })

@@ -1,22 +1,13 @@
 import type { NextPage } from 'next'
-import {useApi} from "../components/context/ApiProvider";
+import {useApi} from "components/context/ApiProvider";
 import React, {useCallback, useEffect, useState} from "react";
 import {Grid, Pagination, styled, Typography} from "@mui/material";
-import Ticket from "../components/Home/Ticket";
-import {useAuth} from "../components/context/AuthProvider";
-import {BaseHeader} from "../components/Home/Common";
-import Stats from "../components/Home/Stats";
-import {Counts} from "../types/ApiProvider";
-import SectionHeader from "../components/Home/SectionHeader";
-import StatsSection from "../components/Home/StatsSection";
-import TicketsSection from "../components/Home/TicketsSection";
-
-const Main = styled(Grid)({
-  width: "100%",
-  backgroundColor: "#F7F8FA",
-  padding: "30px 50px",
-  minHeight: "100vh"
-})
+import {useAuth} from "components/context/AuthProvider";
+import SectionHeader from "components/Home/SectionHeader";
+import StatsSection from "components/Home/StatsSection";
+import TicketsSection from "components/Home/TicketsSection";
+import { Main, BoldHeader } from 'components/base'
+import Loading from "components/base/Loading";
 
 const TicketPagination = styled(Pagination)({
   "& .Mui-selected": {
@@ -74,11 +65,7 @@ const Home: NextPage = () => {
 
   if (loading) {
     return (
-      <Grid container alignItems="center" justifyContent="center">
-        <Typography>
-          Loading...
-        </Typography>
-      </Grid>
+      <Loading loading={loading} text="Gathering Your Tickets" />
     )
   }
 

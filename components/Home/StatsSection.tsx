@@ -13,7 +13,7 @@ const StatsSection: FC<StatsSectionProps> = ({ allCount, openCount, pendingCount
   return (
     <Grid item container spacing={2} sx={{ mt: 1 }}>
       <Grid item xs={3}>
-        <Stats stats={allCount} description="Total number of all tickets" />
+        <Stats stats={allCount} description="Total number of tickets" />
       </Grid>
       <Grid item xs={3}>
         <Stats stats={openCount} description="Total number of open tickets" />

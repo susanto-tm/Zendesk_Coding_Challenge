@@ -20,10 +20,6 @@ const TicketContainer = styled(Container)({
   }
 })
 
-const TicketCard = styled(Link)({
-  textDecoration: "none"
-})
-
 const TicketStatus: FC<{ status: string }> = ({ status }) => {
 
   const getStatusColor = () => {

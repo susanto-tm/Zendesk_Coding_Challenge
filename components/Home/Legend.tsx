@@ -1,9 +1,11 @@
 import React, { FC } from 'react'
 import {Grid, styled} from "@mui/material";
 import {Container, Generic} from "./Common";
+import {BoldHeader, SemiBoldHeader, SemiBoldText} from "components/base";
 
-const LegendText = styled(Generic)({
-  color: "#C2CBD2"
+const LegendText = styled(SemiBoldHeader)({
+  color: "#C2CBD2",
+  fontSize: 18
 })
 
 const Legend: FC = () => {

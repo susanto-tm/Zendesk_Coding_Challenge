@@ -5,6 +5,14 @@ export type GetTickets = (page: number, limit?: number) => Promise<Array<any>>
 export type GetCounts = () => Promise<Counts>
 export type GetTicket = (id: number) => Promise<any>
 
+export interface User {
+  name: string
+  email: string
+  created: Date
+  photo?: string
+  id: string
+}
+
 export interface ApiProviderHooks {
   api?: AxiosInstance
   getTickets: GetTickets

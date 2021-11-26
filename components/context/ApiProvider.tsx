@@ -69,7 +69,7 @@ const ApiProvider: FC = ({ children }) => {
 
   const getTicket = useCallback( async (id: number) => {
     if (api) {
-      return (await api.get(`/tickets/${id}`)).data
+      return (await api.get(`/tickets/${id}`)).data.data
     }
   }, [api])
 

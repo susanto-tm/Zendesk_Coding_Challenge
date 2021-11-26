@@ -1,6 +1,7 @@
 import React, {FC} from "react";
 import {Grid, styled, Typography} from "@mui/material";
 import {Generic} from "./Common";
+import {BoldHeader, BoldText, RegularHeader, RegularText, SemiBoldHeader, SemiBoldText} from "components/base";
 
 interface StatsProps {
   stats: number
@@ -14,12 +15,13 @@ const Container = styled(Grid)({
   height: 180
 })
 
-const StatsDetail = styled(Generic)({
-  fontSize: 32
+const StatsDetail = styled(BoldHeader)({
+  fontSize: 36
 })
 
-const Description = styled(Generic)({
-  color: "#d0d6db"
+const Description = styled(SemiBoldHeader)({
+  color: "#d0d6db",
+  fontSize: 15
 })
 
 const Stats: FC<StatsProps> = ({ stats, description }) => {

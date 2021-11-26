@@ -1,6 +1,7 @@
 import React, {FC} from "react";
 import {Box, styled} from "@mui/material";
 import {Generic} from "./Common";
+import {SemiBoldText} from "components/base";
 
 interface TagProps {
   text: string
@@ -14,7 +15,7 @@ const TagContainer = styled(Box)({
   margin: 0
 })
 
-const TagText = styled(Generic)({
+const TagText = styled(SemiBoldText)({
   color: "#C2CBD2"
 })
 

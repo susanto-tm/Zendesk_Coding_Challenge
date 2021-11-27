@@ -5,12 +5,13 @@ import {BaseHeader} from "./Common";
 interface SectionHeaderProps {
   text: string,
   sx?: any
+  id?: string
 }
 
-const SectionHeader: FC<SectionHeaderProps> = ({ text, sx }) => {
+const SectionHeader: FC<SectionHeaderProps> = ({ text, sx, id }) => {
   return (
     <Grid item sx={sx}>
-      <BaseHeader>
+      <BaseHeader variant="h1" id={id}>
         { text }
       </BaseHeader>
     </Grid>

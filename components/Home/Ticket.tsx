@@ -56,7 +56,7 @@ const Ticket: FC<TicketProps> = ({ data }) => {
   }
 
   return (
-    <TicketContainer onClick={onClick} container sx={{ mt: 1 }} alignItems="center" columns={16}>
+    <TicketContainer onClick={onClick} container sx={{ mt: 1 }} alignItems="center" columns={16} className="ticket-card">
       <Grid item xs={1}>
         <Generic>
           #{ id }

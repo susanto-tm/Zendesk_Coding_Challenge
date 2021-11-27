@@ -71,9 +71,9 @@ const Home: NextPage = () => {
 
   return (
     <Main container flexDirection="column">
-      <SectionHeader text="Quick Stats" />
+      <SectionHeader text="Quick Stats" id="quick-stats" />
       <StatsSection allCount={allCount} openCount={openCount} pendingCount={pendingCount} closedCount={closedCount} />
-      <SectionHeader text="All Tickets" sx={{ mt: 2 }} />
+      <SectionHeader text="All Tickets" id="all-tickets" sx={{ mt: 2 }} />
       <TicketsSection tickets={tickets} />
       <Grid item container justifyContent="flex-end" sx={{ mt: 2 }}>
         <TicketPagination count={Math.ceil(allCount / 25)} onChange={onPageChange} />

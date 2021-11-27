@@ -6,6 +6,7 @@ import {BoldHeader, BoldText, RegularHeader, RegularText, SemiBoldHeader, SemiBo
 interface StatsProps {
   stats: number
   description: string
+  id?: string
 }
 
 const Container = styled(Grid)({
@@ -24,11 +25,11 @@ const Description = styled(SemiBoldHeader)({
   fontSize: 15
 })
 
-const Stats: FC<StatsProps> = ({ stats, description }) => {
+const Stats: FC<StatsProps> = ({ stats, description, id }) => {
   return (
-    <Container container flexDirection="column" alignItems="center" justifyContent="center">
+    <Container container flexDirection="column" alignItems="center" justifyContent="center" className="stats-card">
       <Grid item>
-        <StatsDetail>
+        <StatsDetail variant="h2" className="stats-count" id={id}>
           { stats }
         </StatsDetail>
       </Grid>

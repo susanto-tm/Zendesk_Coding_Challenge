@@ -5,7 +5,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test:e2e": "playwright e2e"
   },
   "dependencies": {
     "@emotion/react": "^11.6.0",
@@ -13,6 +14,7 @@
     "@mui/material": "^5.1.1",
     "@mui/styled-engine-sc": "^5.1.0",
     "axios": "^0.24.0",
+    "dotenv": "^10.0.0",
     "lottie-web": "^5.8.1",
     "moment": "^2.29.1",
     "next": "12.0.4",
@@ -21,6 +23,7 @@
     "styled-components": "^5.3.3"
   },
   "devDependencies": {
+    "@playwright/test": "^1.16.3",
     "@types/node": "16.11.9",
     "@types/react": "17.0.35",
     "eslint": "7",

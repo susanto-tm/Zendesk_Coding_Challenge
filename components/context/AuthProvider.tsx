@@ -1,6 +1,5 @@
 import React, {createContext, FC, useContext, useEffect, useMemo, useState} from "react";
 import axios from "axios";
-import ApiProvider from "./ApiProvider";
 
 interface AuthContextHooks {
   token: string

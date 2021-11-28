@@ -1,5 +1,5 @@
 import type {NextApiRequest, NextApiResponse} from "next";
-import {zendeskApi} from "utils/api/axios";
+import {zendeskApi} from "utils/api";
 import axios from "axios";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {

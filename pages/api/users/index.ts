@@ -1,5 +1,5 @@
 import type {NextApiRequest, NextApiResponse} from "next";
-import {zendeskApi} from "utils/api/axios";
+import {zendeskApi} from "utils/api";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const { headers: { authorization }, method, query: { ids } } = req

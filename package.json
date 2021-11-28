@@ -6,7 +6,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test:e2e": "playwright e2e"
+    "test:e2e": "playwright test --config=e2e/config.ts"
   },
   "dependencies": {
     "@emotion/react": "^11.6.0",

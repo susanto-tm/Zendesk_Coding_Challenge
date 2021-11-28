@@ -7,7 +7,7 @@ dotenv.config({
 
 const config: PlaywrightTestConfig = {
   use: {
-    baseURL: `${process.env.NAMESPACE}:${process.env.PORT}`
+    baseURL: String(process.env.NAMESPACE) ?? "http://localhost:3000"
   }
 }
 

@@ -1,7 +1,7 @@
 import React, {createContext, FC, useCallback, useContext, useMemo} from "react";
 import axios from "axios";
 import {useAuth} from "./AuthProvider";
-import {ApiProviderHooks, GetCounts, GetTickets} from "../../types/ApiProvider";
+import {ApiProviderHooks, GetCounts, GetTickets} from "types/ApiProvider";
 
 const ApiContext = createContext<ApiProviderHooks>({} as ApiProviderHooks)
 
@@ -11,7 +11,7 @@ const ApiProvider: FC = ({ children }) => {
   const api = useMemo( () => {
     if (ready) {
       return axios.create({
-        baseURL: `/api`,
+        baseURL: "/api",
         headers: {
           authorization: `Bearer ${token}`
         }

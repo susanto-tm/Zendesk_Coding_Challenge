@@ -6,10 +6,10 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
   try {
     const clients = await zendeskAuth.get("/clients")
-    const zccsusantotm = clients.data.clients.filter((client: any) => client.identifier === "zcc_susanto_tm")
+    const clientIdentifier = clients.data.clients.filter((client: any) => client.identifier === String(process.env.CLIENT_ID))
 
-    if (zccsusantotm && zccsusantotm.length > 0) {
-      client = zccsusantotm[0]
+    if (clientIdentifier && clientIdentifier.length > 0) {
+      client = clientIdentifier[0]
     }
 
   } catch (e) {
@@ -42,6 +42,12 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
           data: {}
         })
       }
+    } else {
+      return res.status(500).send({
+        type: "ERROR|CLIENT",
+        message: "Unable to find client",
+        data: {}
+      })
     }
   } catch (e) {
     return res.status(500).send({

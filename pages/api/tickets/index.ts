@@ -1,6 +1,5 @@
 import type {NextApiRequest, NextApiResponse} from "next";
-import {zendeskApi} from "utils/api/axios";
-import { readFile } from 'fs';
+import {zendeskApi} from "utils/api";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const { page: queryPage, limit: queryLimit } = req.query
@@ -27,15 +26,15 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     } catch (e) {
       console.error(e)
       return res.status(500).send({
-        type: "ERROR|TICKETS",
-        message: "Error getting tickets",
+        type: "ERROR|AUTH",
+        message: "Unauthorized",
         data: {}
       })
     }
   } else {
     return res.status(400).send({
-      type: "ERROR|AUTH",
-      message: "Unauthorized",
+      type: "ERROR",
+      message: "Bad Request",
       data: {}
     })
   }

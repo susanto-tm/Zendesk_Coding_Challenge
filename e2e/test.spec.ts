@@ -130,7 +130,7 @@ test.describe("proxy_api", () => {
       const fetchTicket = await malformedApi.get(`${baseURL}/api/tickets/${sampleTicketId}`)
       const ticket = await fetchTicket.json()
       expect(fetchTicket.ok()).toBeFalsy()
-      expect(ticket.type).toEqual("ERROR|AUTH")
+      expect(ticket.type).toEqual("ERROR|TICKET")
     })
 
     test("user_ids", async ({ baseURL }) => {

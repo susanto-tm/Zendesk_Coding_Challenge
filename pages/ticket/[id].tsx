@@ -7,6 +7,9 @@ import {Grid, styled} from "@mui/material";
 import Summary from "components/Ticket/Summary";
 import Content from "components/Ticket/Content";
 import Loading from "components/base/Loading";
+import { BoldHeader } from "components/base";
+import Image from 'next/image'
+import Alert from 'assets/icons/alert-circle-outline.svg'
 
 const BaseContainer = styled(Main)({
   padding: 0,
@@ -25,6 +28,7 @@ const TicketPage: NextPage = () => {
   const { id } = router.query
   const { getTicket } = useApi()
   const [ticket, setTicket] = useState<any>()
+  const [error, setError] = useState(false)
 
   const fetchTicket = useCallback(async () => {
     try {
@@ -33,6 +37,7 @@ const TicketPage: NextPage = () => {
       }
     } catch (e) {
       console.error(e)
+      setError(true)
     }
   }, [getTicket, id])
 
@@ -42,8 +47,19 @@ const TicketPage: NextPage = () => {
 
   const loading = !ticket
 
-  if (loading) {
+  if (loading && !error) {
     return <Loading loading={loading} text={`Preparing Ticket ${id}`} />
+  }
+
+  if (error) {
+    return (
+      <Grid container sx={{ height: "100vh", width: "100%"}} alignItems='center' justifyContent="center" flexDirection="column">
+        <Image src={Alert} width={100} height={100}/>
+        <BoldHeader variant="h2" sx={{ fontSize: 38, color: "black", mt: 2 }}>
+          Ticket { id } does not exist
+        </BoldHeader>
+      </Grid>
+    )
   }
 
   return (

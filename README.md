@@ -46,7 +46,7 @@ The following are the required variables (case-sensitive) in order to fully conf
 | CLIENT_EMAIL | The email used to authenticate into the Zendesk API |
 | API_TOKEN | An api token used to authenticate together with the `CLIENT_EMAIL`. An api token can be requested through the Zendesk UI |
 | CLIENT_ID | An OAuth2 unique client identifier used when registering an OAuth application through the Zendesk UI |
-| ZENDESK_DOMAIN | The domain used when creating a Zendesk account. The domain can be identified from: https://{domain}.zendesk.com |
+| ZENDESK_DOMAIN | The domain used when creating a Zendesk account. The domain can be identified from the URL: `https://{ZENDESK_DOMAIN}.zendesk.com` |
 | NAMESPACE | The current URL used to run the NextJS application (usually it is `http://localhost:3000`) |
 
 ## Design

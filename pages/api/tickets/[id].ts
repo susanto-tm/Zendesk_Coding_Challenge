@@ -17,8 +17,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     }
     catch (e) {
       return res.status(500).send({
-        type: "ERROR|AUTH",
-        message: "Unauthorized",
+        type: "ERROR|TICKET",
+        message: "Unauthorized or Bad Request",
         data: {}
       })
     }

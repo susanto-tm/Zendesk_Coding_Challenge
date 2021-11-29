@@ -75,9 +75,11 @@ const Home: NextPage = () => {
       <StatsSection allCount={allCount} openCount={openCount} pendingCount={pendingCount} closedCount={closedCount} />
       <SectionHeader text="All Tickets" id="all-tickets" sx={{ mt: 2 }} />
       <TicketsSection tickets={tickets} />
-      <Grid item container justifyContent="flex-end" sx={{ mt: 2 }}>
-        <TicketPagination count={Math.ceil(allCount / 25)} onChange={onPageChange} />
-      </Grid>
+      { tickets && tickets.length > 0 ?
+        <Grid item container justifyContent="flex-end" sx={{ mt: 2 }}>
+          <TicketPagination count={Math.ceil(allCount / 25)} onChange={onPageChange} />
+        </Grid>
+      : null }
     </Main>
   )
 }

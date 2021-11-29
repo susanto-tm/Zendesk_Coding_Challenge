@@ -17,7 +17,7 @@
 ## Installation
 
 The application requires a NodeJS runtime to be installed in order
-to run the NextJS application. The NodeJS run time can be downloaded [here](https://nodejs.org/en/).
+to run the NextJS application. The NodeJS runtime can be downloaded [here](https://nodejs.org/en/).
 
 Once Node has been installed, the application specifically uses `yarn` as its package manager.
 Install `yarn` using `npm`:
@@ -32,9 +32,10 @@ In the root directory, install all the necessary dependencies for the applicatio
 yarn install
 ```
 
-Then to start the application, run:
+Then to start the application, in a production server, run:
 
 ```bash
+yarn build
 yarn start
 ```
 
@@ -44,7 +45,7 @@ To start the development server, run:
 yarn dev
 ```
 
-Both the application and the proxy api will start and can be accessed through
+Both the application and the api proxy will start and can be accessed through
 `http://localhost:3000` if a URL is not specified.
 
 ## Configuration
@@ -168,7 +169,7 @@ The following are a summary of all commands to run the application.
 
 | Name | Description |
 |:-----|:------------|
-| `yarn start` | Starts the application |
+| `yarn start` | Starts the application in a production server |
 | `yarn dev` | Starts the development server (with hot-reload) |
 | `yarn test:e2e` | Starts running end-to-end testing using playwright |
 | `yarn build` | Builds the application into static JavaScript files |

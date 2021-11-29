@@ -23,7 +23,7 @@ test.describe("component_tests", () => {
     await page.locator("h1#quick-stats").waitFor()
   })
 
-  test.describe("basic tests", () => {
+  test.describe("basic_tests", () => {
     test("page_load", async ({page, baseURL}) => {
       await expect(page.locator("h1#quick-stats")).toHaveText("Quick Stats")
       await expect(page.locator("h1#all-tickets")).toHaveText("All Tickets")
@@ -58,7 +58,7 @@ test.describe("component_tests", () => {
   })
 })
 
-test.describe("proxy_api", () => {
+test.describe("api_proxy", () => {
   let api: APIRequestContext, sampleTicketId: number, sampleUserId: number
 
   test("oauth_token", async ({ playwright, baseURL, request }) => {
@@ -76,7 +76,11 @@ test.describe("proxy_api", () => {
   test("first_25_tickets", async () => {
     const fetchTickets = await api.get("/api/tickets")
     const tickets = (await fetchTickets.json()).data
-    expect(tickets.length).toEqual(25)
+    if (tickets.length >= 25) {
+      expect(tickets.length).toEqual(25)
+    } else {
+      expect(tickets.length).toBeLessThan(25)
+    }
     sampleTicketId = tickets[0].id  // sample ticket for later tests
     sampleUserId = tickets[0].requester_id  // sample user id for later tests
   })
@@ -105,6 +109,13 @@ test.describe("proxy_api", () => {
       const user = await fetchUser.json()
       expect(fetchUser.ok()).toBeFalsy()
       expect(user.type).toEqual("ERROR")
+    })
+
+    test("ticket_count", async ({ baseURL, request }) => {
+      const fetchCount = await request.get(`${baseURL}/api/tickets/count`)
+      const count = await fetchCount.json()
+      expect(fetchCount.ok()).toBeFalsy()
+      expect(count.type).toEqual("ERROR")
     })
   })
 
@@ -142,6 +153,13 @@ test.describe("proxy_api", () => {
       const user = await fetchUser.json()
       expect(fetchUser.ok()).toBeFalsy()
       expect(user.type).toEqual("ERROR|AUTH")
+    })
+
+    test("ticket_count", async ({ baseURL }) => {
+      const fetchCount = await malformedApi.get(`${baseURL}/api/tickets/count`)
+      const count = await fetchCount.json()
+      expect(fetchCount.ok()).toBeFalsy()
+      expect(count.type).toEqual("ERROR|AUTH")
     })
   })
 
